@@ -124,7 +124,7 @@ function App() {
 }
 
 // ! check 
-consoleee.log("It is running")
+consoleee.log("It is running") {};
 
 // Initialize the chess board with pieces in their starting positions
 function initializeBoard() {
