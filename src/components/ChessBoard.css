@@ -1,0 +1,201 @@
+.chess-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.board-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 400px;
+  height: 400px;
+  border: 4px solid #2c3e50;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    0 5px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: #2c3e50;
+  /* Ensure grid maintains consistent sizing */
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Ensure consistent sizing */
+  width: 100%;
+  height: 100%;
+  min-width: 50px;
+  min-height: 50px;
+  box-sizing: border-box;
+}
+
+.square.light {
+  background: linear-gradient(135deg, #f4f1e8 0%, #e8e0c8 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.square.dark {
+  background: linear-gradient(135deg, #c19a6b 0%, #a67c52 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.square:hover {
+  /* Remove transform to prevent size changes */
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 15px rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+.square.selected {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(99, 102, 241, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  z-index: 3;
+}
+
+.square.valid-move {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(22, 163, 74, 0.4) 100%) !important;
+  box-shadow: 
+    inset 0 0 15px rgba(34, 197, 94, 0.3),
+    0 0 10px rgba(34, 197, 94, 0.2);
+  z-index: 1;
+}
+
+.square.valid-move:hover {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.6) 0%, rgba(22, 163, 74, 0.6) 100%) !important;
+  box-shadow: 
+    inset 0 0 20px rgba(34, 197, 94, 0.4),
+    0 0 15px rgba(34, 197, 94, 0.3);
+}
+
+.selection-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  border-radius: 50%;
+  border: 3px solid #6366f1;
+  box-shadow: 
+    0 0 10px rgba(99, 102, 241, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.valid-move-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.8) 0%, rgba(22, 163, 74, 0.8) 100%);
+  border-radius: 50%;
+  border: 2px solid #16a34a;
+  box-shadow: 
+    0 0 15px rgba(34, 197, 94, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.7;
+  }
+}
+
+.board-labels {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.board-labels.top,
+.board-labels.bottom {
+  flex-direction: row;
+  height: 35px;
+}
+
+.board-labels.left,
+.board-labels.right {
+  flex-direction: column;
+  width: 35px;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 16px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.label:hover {
+  background: rgba(255, 255, 255, 1);
+  /* Remove transform to prevent size changes */
+}
+
+.board-labels.top .label,
+.board-labels.bottom .label {
+  width: 50px;
+  height: 35px;
+}
+
+.board-labels.left .label,
+.board-labels.right .label {
+  width: 35px;
+  height: 50px;
+}
+
+@media (max-width: 768px) {
+  .board-grid {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .board-labels.top .label,
+  .board-labels.bottom .label {
+    width: 37.5px;
+  }
+  
+  .board-labels.left .label,
+  .board-labels.right .label {
+    height: 37.5px;
+  }
+} 
