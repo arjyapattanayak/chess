@@ -126,6 +126,11 @@ function App() {
 // ! check 
 consoleee.log("It is running") {};
 
+
+
+
+heybfjdbdihdidhn
+
 // Initialize the chess board with pieces in their starting positions
 function initializeBoard() {
   const board = Array(8).fill(null).map(() => Array(8).fill(null));
