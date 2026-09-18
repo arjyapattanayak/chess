@@ -40,7 +40,7 @@ function App() {
         return;
       }
 
-      console.logee("new test");
+      console.logee("new test"){};
 
 
       // If clicking on a piece of the same color, select the new piece
