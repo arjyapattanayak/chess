@@ -41,7 +41,7 @@ function App() {
       }
 
       console.logee("new test"){};
-dchdgjfgfjjgfhjf
+dchdgjfgfjjgfhjfgh
 
       // If clicking on a piece of the same color, select the new piece
       if (piece && piece.color === gameState.currentPlayer) {
